@@ -1,5 +1,10 @@
 # qq-frontend
 
+## CLI setup
+```
+yarn global add @vue/cli @vue/cli-service
+```
+
 ## Project setup
 ```
 yarn install
