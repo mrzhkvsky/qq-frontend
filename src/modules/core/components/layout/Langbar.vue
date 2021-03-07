@@ -1,6 +1,6 @@
 <template>
-  <li class="nav-item dropdown" v-click-away="onClickAway">
-    <a class="nav-flag dropdown-toggle" href="#" @click="toggle">
+  <li class="nav-item dropdown">
+    <a class="nav-flag dropdown-toggle" href="#" @click="toggle" v-click-away="onClickAway">
       <img :src="loadFlag($i18n.locale)" :alt="$i18n.locale">
     </a>
     <div class="dropdown-menu dropdown-menu-end" :class="{ 'show': isOpen }">
@@ -13,14 +13,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import useToggleDropdown from '@/use/useToggleDropdown'
 
 export default {
   setup() {
-    const isOpen = ref(false)
-    const toggle = () => isOpen.value = !isOpen.value
-    const onClickAway = () => isOpen.value = false
+    const { isOpen, toggleMethod, closeMethod } = useToggleDropdown()
 
     const { locale } = useI18n({ useScope: 'global' })
 
@@ -28,7 +26,7 @@ export default {
 
     const loadFlag = (name) => require(`@/assets/img/flags/${name}.png`)
 
-    return { isOpen, toggle, onClickAway, changeLocale, loadFlag }
+    return { isOpen, toggleMethod, closeMethod, changeLocale, loadFlag }
   }
 }
 </script>

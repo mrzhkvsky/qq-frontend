@@ -1,6 +1,6 @@
 <template>
-  <li class="nav-item dropdown" v-click-away="onClickAway">
-    <a class="nav-icon dropdown-toggle" href="#" @click="toggle">
+  <li class="nav-item dropdown">
+    <a class="nav-icon dropdown-toggle" href="#" @click="toggle" v-click-away="onClickAway">
       <div class="position-relative">
         <MessageSquareIcon />
       </div>
@@ -69,15 +69,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import useToggleDropdown from '@/use/useToggleDropdown'
 
 export default {
   setup() {
-    const isOpen = ref(false)
-    const toggle = () => isOpen.value = !isOpen.value
-    const onClickAway = () => isOpen.value = false
+    const { isOpen, toggleMethod, closeMethod } = useToggleDropdown()
 
-    return { isOpen, toggle, onClickAway }
+    return { isOpen, toggleMethod, closeMethod }
   }
 }
 </script>

@@ -1,12 +1,14 @@
 <template>
   <li class="nav-item dropdown" v-click-away="onClickAway">
-    <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" @click="toggle">
-      <UserIcon />
-    </a>
-    <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" @click="toggle">
-      <img src="@/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall">
-      <span class="text-dark">Charles Hall</span>
-    </a>
+    <div v-click-away="onClickAway">
+      <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" @click="toggle">
+        <UserIcon />
+      </a>
+      <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" @click="toggle">
+        <img src="@/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall">
+        <span class="text-dark">Charles Hall</span>
+      </a>
+    </div>
     <div class="dropdown-menu dropdown-menu-end" :class="{ 'show': isOpen }">
       <a class="dropdown-item" href="#">
         <UserIcon />
@@ -26,15 +28,13 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import useToggleDropdown from '@/use/useToggleDropdown'
 
 export default {
   setup() {
-    const isOpen = ref(false)
-    const toggle = () => isOpen.value = !isOpen.value
-    const onClickAway = () => isOpen.value = false
+    const { isOpen, toggleMethod, closeMethod } = useToggleDropdown()
 
-    return { isOpen, toggle, onClickAway }
+    return { isOpen, toggleMethod, closeMethod }
   }
 }
 </script>
