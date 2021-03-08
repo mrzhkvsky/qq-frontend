@@ -2,8 +2,9 @@
 
 ## CLI setup
 ```
-yarn global add @vue/cli @vue/cli-service
+yarn global add @vue/cli
 ```
+as sudo for linux
 
 ## Project setup
 ```
