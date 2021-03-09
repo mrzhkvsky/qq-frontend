@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item dropdown">
-    <a class="nav-flag dropdown-toggle" href="#" @click="toggle" v-click-away="onClickAway">
+    <a class="nav-flag dropdown-toggle" href="#" @click="toggleMethod" v-click-away="closeMethod">
       <img :src="loadFlag($i18n.locale)" :alt="$i18n.locale">
     </a>
     <div class="dropdown-menu dropdown-menu-end" :class="{ 'show': isOpen }">

@@ -1,6 +1,6 @@
 <template>
-  <Main title="Test Home">
-    <div>Soooo</div>
+  <Main title="Not Found">
+    <h1>Not Found</h1>
   </Main>
 </template>
 

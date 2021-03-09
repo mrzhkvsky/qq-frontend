@@ -1,10 +1,10 @@
 <template>
-  <li class="nav-item dropdown" v-click-away="onClickAway">
-    <div v-click-away="onClickAway">
-      <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" @click="toggle">
+  <li class="nav-item dropdown">
+    <div v-click-away="closeMethod">
+      <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" @click="toggleMethod">
         <UserIcon />
       </a>
-      <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" @click="toggle">
+      <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" @click="toggleMethod">
         <img src="@/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall">
         <span class="text-dark">Charles Hall</span>
       </a>
@@ -12,16 +12,16 @@
     <div class="dropdown-menu dropdown-menu-end" :class="{ 'show': isOpen }">
       <a class="dropdown-item" href="#">
         <UserIcon />
-        {{ $t('core.userbar.profile') }}
+        {{ $t('app.userbar.profile') }}
       </a>
       <a class="dropdown-item" href="#">
         <SettingsIcon />
-        {{ $t('core.userbar.settings') }}
+        {{ $t('app.userbar.settings') }}
       </a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">
         <LogOutIcon />
-        {{ $t('core.userbar.logout') }}
+        {{ $t('app.userbar.logout') }}
       </a>
     </div>
   </li>

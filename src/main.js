@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from '@/App'
 
-import router from './plugins/router'
-import store from './plugins/store'
+import router from '@/plugins/router'
+import store from '@/plugins/store'
 
 import FeatherIcon from '@/plugins/feather-icons'
 import VueClickAway from '@/plugins/v-click-away'

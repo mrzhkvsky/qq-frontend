@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import Alertbar from '@/modules/core/components/layout/Alertbar'
-import Messagebar from '@/modules/core/components/layout/Messagebar'
-import Userbar from '@/modules/core/components/layout/Userbar'
-import Searchbar from '@/modules/core/components/layout/Searchbar'
-import Langbar from '@/modules/core/components/layout/Langbar'
+import Alertbar from '@/components/layout/Alertbar'
+import Messagebar from '@/components/layout/Messagebar'
+import Userbar from '@/components/layout/Userbar'
+import Searchbar from '@/components/layout/Searchbar'
+import Langbar from '@/components/layout/Langbar'
 
 export default {
   components: { Langbar, Searchbar, Alertbar, Messagebar, Userbar },

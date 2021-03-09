@@ -1,17 +1,22 @@
+import auth from '@/middlewares/auth'
+
 export default [
   {
-    path: '/',
-    component: () => import('@/modules/core/layouts/default'),
+    path: '/home',
+    component: () => import(/* webpackChunkName: "home-layout" */ '@/layouts/default'),
+    meta: {
+      middlewares: [auth]
+    },
     children: [
       {
-        path: '/home',
-        name: 'home',
-        component: () => import('@/modules/home/pages/index')
+        path: '',
+        name: 'home-index',
+        component: () => import(/* webpackChunkName: "home-index" */ '@/modules/home/pages/index')
       },
       {
-        path: '/home/test',
+        path: 'test',
         name: 'home-test',
-        component: () => import('@/modules/home/pages/test')
+        component: () => import(/* webpackChunkName: "home-test" */ '@/modules/home/pages/test')
       }
     ]
   }

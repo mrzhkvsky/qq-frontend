@@ -1,11 +1,10 @@
 import { createI18n } from 'vue-i18n/dist/vue-i18n.esm-bundler.js'
-import Modules from '@/modules'
+import messages from '@/locales'
+import modules from '@/modules'
 
-const messages = {}
-
-Object.keys(Modules).forEach(function(key) {
-  if (Modules[key].locales) {
-    Object.assign(messages, Modules[key].locales)
+modules.forEach((module) => {
+  if ('locales' in module) {
+    Object.assign(messages, module.locales)
   }
 })
 

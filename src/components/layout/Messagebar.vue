@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item dropdown">
-    <a class="nav-icon dropdown-toggle" href="#" @click="toggle" v-click-away="onClickAway">
+    <a class="nav-icon dropdown-toggle" href="#" @click="toggleMethod" v-click-away="closeMethod">
       <div class="position-relative">
         <MessageSquareIcon />
       </div>

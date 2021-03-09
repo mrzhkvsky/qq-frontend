@@ -1,5 +1,5 @@
 <template>
-  <Content title="Index Home">
+  <Main title="Index Home">
     <div class="col-12">
     <div class="card">
       <div class="card-header">
@@ -9,12 +9,12 @@
       </div>
     </div>
     </div>
-  </Content>
+  </Main>
 </template>
 
 <script>
-import Content from '@/modules/core/components/layout/Content'
+import Main from '@/components/layout/Main'
 export default {
-  components: { Content }
+  components: { Main }
 }
 </script>

@@ -1,5 +1,5 @@
 export default {
-  core: {
+  app: {
     sidebar: {
       home: 'Домой',
       test: 'Тест',

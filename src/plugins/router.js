@@ -1,23 +1,43 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Modules from '@/modules'
-
+import modules from '@/modules'
 
 let routes = [
   {
     path: '/',
-    redirect: { name: 'home' }
+    component: () => import('@/layouts/default'),
+    children: [
+      {
+        path: '',
+        redirect: { name: 'home-index' },
+      },
+      {
+        path: ':path',
+        name: 'not-found',
+        component: () => import(/* webpackChunkName: "not-found" */ '@/components/NotFound')
+      }
+    ]
   }
 ]
 
-Object.keys(Modules).forEach(function(key) {
-  if (Modules[key].routes) {
-    routes = routes.concat(Modules[key].routes)
+modules.forEach((module) => {
+  if ('routes' in module) {
+    routes = routes.concat(module.routes)
   }
 })
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if ('middlewares' in to.meta) {
+    to.meta.middlewares.forEach((middleware) => {
+      return middleware(to, from, next)
+    })
+  } else {
+    next()
+  }
 })
 
 export default router
