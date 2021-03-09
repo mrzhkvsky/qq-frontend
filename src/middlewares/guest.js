@@ -1,7 +1,7 @@
-export default function auth(to, from, next) {
+export default function guest(to, from, next) {
   // eslint-disable-next-line no-constant-condition
   if (false) {
-    return next({ name: 'auth-login' })
+    return next({ name: 'home-index' })
   } else {
     next()
   }

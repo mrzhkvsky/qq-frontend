@@ -33,7 +33,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if ('middlewares' in to.meta) {
     to.meta.middlewares.forEach((middleware) => {
-      return middleware(to, from, next)
+      middleware(to, from, next)
     })
   } else {
     next()

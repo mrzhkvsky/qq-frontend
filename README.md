@@ -1,12 +1,14 @@
 # qq-frontend
 
-## CLI setup
+## Project setup
+
+### CLI setup
 ```
 yarn global add @vue/cli
 ```
-as sudo for linux
+as `sudo` for linux
 
-## Project setup
+### Install dependencies
 ```
 yarn install
 ```
@@ -31,11 +33,23 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Documentation
 
-Module export object
+### Module export object
 ```
 export default {
   routes,
   locales?,
   store?
 }
+```
+
+### Middleware example
+```
+export default function name(to, from, next) {
+  if (conditional rule) {
+    return next({ name: 'page-name' })
+  } else {
+    next()
+  }
+}
+
 ```
