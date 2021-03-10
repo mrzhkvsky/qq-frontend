@@ -30,7 +30,6 @@
             <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
           </div>
         </form>
-        <router-link :to="{ name: 'auth-register' }">Have not account?</router-link>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <nav id="sidebar" class="sidebar">
     <div class="sidebar-content">
       <router-link class="sidebar-brand" :to="{ name: 'home-index' }">
-        <span class="align-middle">QQ Project</span>
+        <span class="align-middle">QQ App</span>
       </router-link>
       <ul class="sidebar-nav">
         <li class="sidebar-header">
@@ -28,12 +28,6 @@
           <router-link class="sidebar-link" :to="{ name: 'auth-login' }">
             <AirplayIcon />
             <span class="align-middle">{{ $t('app.sidebar.login') }}</span>
-          </router-link>
-        </li>
-        <li class="sidebar-item">
-          <router-link class="sidebar-link" :to="{ name: 'auth-register' }">
-            <AirplayIcon />
-            <span class="align-middle">{{ $t('app.sidebar.register') }}</span>
           </router-link>
         </li>
       </ul>
