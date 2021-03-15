@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand navbar-light navbar-bg">
-    <a class="sidebar-toggle d-flex">
+    <a class="sidebar-toggle d-flex" @click="toggleSidebar">
       <i class="hamburger align-self-center"></i>
     </a>
     <Searchbar />
@@ -9,7 +9,7 @@
         <Alertbar />
         <Messagebar />
         <Langbar />
-        <Userbar />
+        <Userbar :user="user" />
       </ul>
     </div>
   </nav>
@@ -21,8 +21,17 @@ import Messagebar from '@/components/layout/Messagebar'
 import Userbar from '@/components/layout/Userbar'
 import Searchbar from '@/components/layout/Searchbar'
 import Langbar from '@/components/layout/Langbar'
+import useAuth from '@/use/useAuth'
 
 export default {
   components: { Langbar, Searchbar, Alertbar, Messagebar, Userbar },
+  props: {
+    toggleSidebar: Function
+  },
+  setup () {
+    const auth = useAuth()
+
+    return { user: auth.user }
+  }
 }
 </script>

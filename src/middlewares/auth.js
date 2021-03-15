@@ -1,8 +1,11 @@
-export default function auth(to, from, next) {
-  // eslint-disable-next-line no-constant-condition
-  if (false) {
-    return next({ name: 'auth-login' })
+import store from '@/store'
+
+const auth = (to, from, next) => {
+  if (!store.getters['auth/isAuth']) {
+    next({ name: 'auth-login' })
   } else {
     next()
   }
 }
+
+export default auth

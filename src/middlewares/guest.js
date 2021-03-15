@@ -1,8 +1,11 @@
-export default function guest(to, from, next) {
-  // eslint-disable-next-line no-constant-condition
-  if (false) {
+import store from '@/store'
+
+const guest = (to, from, next) => {
+  if (store.getters['auth/isAuth']) {
     return next({ name: 'home-index' })
   } else {
     next()
   }
 }
+
+export default guest

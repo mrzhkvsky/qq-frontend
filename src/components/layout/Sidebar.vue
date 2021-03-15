@@ -1,5 +1,5 @@
 <template>
-  <nav id="sidebar" class="sidebar">
+  <nav id="sidebar" class="sidebar" :class="{ 'collapsed': !isOpen }">
     <div class="sidebar-content">
       <router-link class="sidebar-brand" :to="{ name: 'home-index' }">
         <span class="align-middle">QQ App</span>
@@ -11,13 +11,13 @@
         <li class="sidebar-item">
           <router-link class="sidebar-link" :to="{ name: 'home-index' }">
             <AirplayIcon />
-            <span class="align-middle">{{ $t('app.sidebar.home') }}</span>
+            <span class="align-middle">{{ $t('layout.sidebar.home') }}</span>
           </router-link>
         </li>
         <li class="sidebar-item">
           <router-link class="sidebar-link" :to="{ name: 'home-test' }">
             <AirplayIcon />
-            <span class="align-middle">{{ $t('app.sidebar.test') }}</span>
+            <span class="align-middle">{{ $t('layout.sidebar.test') }}</span>
           </router-link>
         </li>
 
@@ -27,10 +27,21 @@
         <li class="sidebar-item">
           <router-link class="sidebar-link" :to="{ name: 'auth-login' }">
             <AirplayIcon />
-            <span class="align-middle">{{ $t('app.sidebar.login') }}</span>
+            <span class="align-middle">{{ $t('layout.sidebar.login') }}</span>
           </router-link>
         </li>
       </ul>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  props: {
+    isOpen: {
+      type: Boolean,
+      default: true
+    }
+  }
+}
+</script>

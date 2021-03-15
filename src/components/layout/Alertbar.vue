@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item dropdown">
-    <a class="nav-icon dropdown-toggle" href="#" @click="toggleMethod" v-click-away="closeMethod">
+    <a class="nav-icon dropdown-toggle" href="#" @click="toggle" v-click-away="close">
       <div class="position-relative">
         <BellIcon />
         <span class="indicator">4</span>
@@ -78,13 +78,13 @@
 </template>
 
 <script>
-import useToggleDropdown from '@/use/useToggleDropdown'
+import useToggle from '@/use/useToggle'
 
 export default {
   setup() {
-    const { isOpen, toggleMethod, closeMethod } = useToggleDropdown()
+    const { isOpen, toggle, close } = useToggle()
 
-    return { isOpen, toggleMethod, closeMethod }
+    return { isOpen, toggle, close }
   }
 }
 </script>
