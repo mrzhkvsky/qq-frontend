@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import modules from '@/modules'
+import fetchUser from '@/middlewares/fetchUser'
+
+import auth from '@/router/auth'
+import home from '@/router/home'
 
 let routes = [
   {
@@ -16,21 +19,19 @@ let routes = [
         component: () => import(/* webpackChunkName: "not-found" */ '@/components/NotFound')
       }
     ]
-  }
+  },
+  ...auth,
+  ...home
 ]
-
-modules.forEach((module) => {
-  if ('routes' in module) {
-    routes = routes.concat(module.routes)
-  }
-})
 
 const router = createRouter({
   history: createWebHistory(),
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  await fetchUser()
+
   if ('middlewares' in to.meta) {
     to.meta.middlewares.forEach((middleware) => {
       middleware(to, from, next)
