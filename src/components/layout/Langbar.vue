@@ -14,7 +14,7 @@
 
 <script>
 import { useI18n } from 'vue-i18n'
-import useToggle from '@/use/useToggle'
+import useToggle from '@/composables/use-toggle'
 
 export default {
   setup() {

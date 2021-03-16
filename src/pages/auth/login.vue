@@ -29,16 +29,17 @@
 </template>
 
 <script>
-import store from '@/store'
-import router from '@/router'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 import { useI18n } from 'vue-i18n'
+import authService from '@/services/auth.service'
+import { useRouter } from 'vue-router'
 
 export default {
   components: { Field, Form, ErrorMessage },
   setup() {
     const { t } = useI18n()
+    const router = useRouter()
 
     const schema = yup.object().shape({
       email: yup.string().email().required(),
@@ -47,13 +48,16 @@ export default {
 
     const submitForm = async ({ email, password }, actions) => {
       try {
-        await store.dispatch('auth/login', { email, password })
+        await authService.login({ email, password })
       } catch (e) {
-        actions.setErrors({ email: t('auth.error') })
-        return
-      }
+        console.log(e instanceof)
+        if (e.response !== undefined && e.response.status === 4000) {
+          actions.setErrors({ email: t('auth.error') })
+          return
+        }
 
-      await store.dispatch('auth/fetchUser')
+        throw e
+      }
 
       await router.push({ name: 'home-index' })
     }

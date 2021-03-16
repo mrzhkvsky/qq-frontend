@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import useToggle from '@/use/useToggle'
+import useToggle from '@/composables/use-toggle'
 
 export default {
   setup() {

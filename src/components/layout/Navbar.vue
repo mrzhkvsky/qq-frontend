@@ -9,7 +9,7 @@
         <Alertbar />
         <Messagebar />
         <Langbar />
-        <Userbar :user="user" />
+        <Userbar />
       </ul>
     </div>
   </nav>
@@ -21,17 +21,11 @@ import Messagebar from '@/components/layout/Messagebar'
 import Userbar from '@/components/layout/Userbar'
 import Searchbar from '@/components/layout/Searchbar'
 import Langbar from '@/components/layout/Langbar'
-import useAuth from '@/use/useAuth'
 
 export default {
   components: { Langbar, Searchbar, Alertbar, Messagebar, Userbar },
   props: {
     toggleSidebar: Function
-  },
-  setup () {
-    const auth = useAuth()
-
-    return { user: auth.user }
   }
 }
 </script>

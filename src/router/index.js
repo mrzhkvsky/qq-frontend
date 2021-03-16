@@ -1,10 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import fetchUser from '@/middlewares/fetchUser'
+import authRoutes from '@/router/auth.routes'
+import homeRoutes from '@/router/home.routes'
+import logMiddleware from '@/middlewares/log.middleware'
+import fetchUserMiddleware from '@/middlewares/fetch-user.middleware'
 
-import auth from '@/router/auth'
-import home from '@/router/home'
+const globalMiddlewares = [
+  logMiddleware,
+  fetchUserMiddleware
+]
 
-let routes = [
+const routes = [
   {
     path: '/',
     component: () => import('@/layouts/default'),
@@ -20,8 +25,8 @@ let routes = [
       }
     ]
   },
-  ...auth,
-  ...home
+  ...authRoutes,
+  ...homeRoutes
 ]
 
 const router = createRouter({
@@ -30,15 +35,21 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  await fetchUser()
+  const middlewares = []
+  middlewares.push(...globalMiddlewares)
 
   if ('middlewares' in to.meta) {
-    to.meta.middlewares.forEach((middleware) => {
-      middleware(to, from, next)
-    })
-  } else {
-    next()
+    middlewares.push(...to.meta.middlewares)
   }
+
+  let params = undefined
+  for (let i = 0; i < middlewares.length; i++) {
+    params = await middlewares[i](to, from)
+
+    if (params) break
+  }
+
+  next(params)
 })
 
 export default router

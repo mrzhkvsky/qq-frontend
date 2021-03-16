@@ -1,5 +1,5 @@
-import layout from '@/locales/ru/layout'
-import auth from '@/locales/ru/auth'
+import layout from '@/locales/ru/layout.locale'
+import auth from '@/locales/ru/auth.locale'
 
 export default {
   layout,

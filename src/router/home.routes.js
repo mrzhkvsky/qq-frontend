@@ -1,11 +1,11 @@
-import auth from '@/middlewares/auth'
+import authMiddleware from '@/middlewares/auth.middleware'
 
-const home = [
+const homeRoutes = [
   {
     path: '/home',
     component: () => import(/* webpackChunkName: "home-layout" */ '@/layouts/default'),
     meta: {
-      middlewares: [auth]
+      middlewares: [authMiddleware]
     },
     children: [
       {
@@ -22,4 +22,4 @@ const home = [
   }
 ]
 
-export default home
+export default homeRoutes

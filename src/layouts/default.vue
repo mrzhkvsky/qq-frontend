@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import useToggle from '@/use/useToggle'
+import useToggle from '@/composables/use-toggle'
 import Sidebar from '@/components/layout/Sidebar'
 import Navbar from '@/components/layout/Navbar'
 

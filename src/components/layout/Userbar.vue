@@ -1,7 +1,7 @@
 <template>
   <li class="nav-item dropdown">
     <div v-click-away="close">
-      <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" @click="toggle">
+      <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" @click="toggle">
         <UserIcon />
       </a>
       <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" @click="toggle">
@@ -28,19 +28,17 @@
 </template>
 
 <script>
-import useToggle from '@/use/useToggle'
-import store from '@/store'
+import useToggle from '@/composables/use-toggle'
+import authService from '@/services/auth.service'
 
 export default {
-  props: {
-    user: Object
-  },
   setup() {
     const { isOpen, toggle, close } = useToggle()
 
-    const logout = () => store.dispatch('auth/logout')
+    const user = authService.getUser()
+    const logout = authService.logout
 
-    return { isOpen, toggle, close, logout }
+    return { isOpen, toggle, close, user, logout }
   }
 }
 </script>

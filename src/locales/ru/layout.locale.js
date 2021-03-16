@@ -1,4 +1,4 @@
-const layout = {
+const layoutLocale = {
   sidebar: {
     home: 'Домой',
     test: 'Тест',
@@ -12,4 +12,4 @@ const layout = {
   }
 }
 
-export default layout
+export default layoutLocale

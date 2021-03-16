@@ -1,4 +1,4 @@
-const auth = {
+const authLocale = {
   welcome: 'Welcome',
   info: 'Sign in to your account to continue',
   email: 'E-mail',
@@ -9,4 +9,4 @@ const auth = {
   error: 'Bad credentials, please verify that your email/password are correctly set'
 }
 
-export default auth
+export default authLocale

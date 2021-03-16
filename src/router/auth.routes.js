@@ -1,11 +1,11 @@
-import guest from '@/middlewares/guest'
+import guestMiddleware from '@/middlewares/guest.middleware'
 
-const auth = [
+const authRoutes = [
   {
     path: '/auth',
     component: () => import('@/layouts/auth'),
     meta: {
-      middlewares: [guest]
+      middlewares: [guestMiddleware]
     },
     children: [
       {
@@ -18,4 +18,4 @@ const auth = [
   }
 ]
 
-export default auth
+export default authRoutes
