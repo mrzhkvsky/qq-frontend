@@ -50,8 +50,7 @@ export default {
       try {
         await authService.login({ email, password })
       } catch (e) {
-        console.log(e instanceof)
-        if (e.response !== undefined && e.response.status === 4000) {
+        if (e.response !== undefined && e.response.status === 400) {
           actions.setErrors({ email: t('auth.error') })
           return
         }
