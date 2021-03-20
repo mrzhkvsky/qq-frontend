@@ -1,5 +1,5 @@
 import { createI18n } from 'vue-i18n/dist/vue-i18n.esm-bundler.js'
-import messages from '@/locales'
+import messages from '@/app/locales'
 
 export default {
   install: (app) => {

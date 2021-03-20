@@ -36,7 +36,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Module export object
 ```
 export default {
-  routes,
+  router,
   locales?,
   store?
 }
