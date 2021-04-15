@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" data-sidebar="left">
     <Sidebar :is-open="isOpen" />
     <div class="main">
       <Navbar :toggle-sidebar="toggle" />
@@ -14,6 +14,7 @@ import Sidebar from '@/core/components/layout/Sidebar'
 import Navbar from '@/core/components/layout/Navbar'
 
 export default {
+  name: 'default',
   components: {
     Sidebar,
     Navbar

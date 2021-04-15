@@ -14,10 +14,10 @@
         <FeatherIcon name="user" />
         {{ $t('app.userbar.profile') }}
       </a>
-      <a class="dropdown-item" href="#">
+      <router-link :to="{ name: 'account-settings-profile' }" class="dropdown-item">
         <FeatherIcon name="settings" />
         {{ $t('app.userbar.settings') }}
-      </a>
+      </router-link>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#" @click="logout">
         <FeatherIcon name="log-in" />
@@ -30,13 +30,17 @@
 <script>
 import useToggle from '@/core/composables/use-toggle'
 import authService from '@/modules/auth/services/auth.service'
+import router from '@/plugins/router'
 
 export default {
   setup() {
     const { isOpen, toggle, close } = useToggle()
 
     const user = authService.getUser()
-    const logout = authService.logout
+    const logout = () => {
+      authService.logout()
+      router.push({ name: 'auth-login' })
+    }
 
     return { isOpen, toggle, close, user, logout }
   }

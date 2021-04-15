@@ -8,60 +8,57 @@
   <div class="card">
     <div class="card-body">
       <div class="m-sm-4">
-        <form @submit="onSubmit">
+        <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors }">
           <div class="mb-3">
             <label class="form-label">{{ $t('auth.email') }}</label>
-            <input class="form-control form-control-lg" v-model="email" :class="{ 'is-invalid': errors.email }" type="email" name="email" :placeholder="$t('auth.emailPlaceholder')" />
-            <div v-if="errors.email" class="invalid-feedback">{{ errors.email }}</div>
+            <Field class="form-control form-control-lg" :class="{ 'is-invalid': errors.email }" type="email" name="email" :placeholder="$t('auth.emailPlaceholder')" />
+            <ErrorMessage name="email" class="invalid-feedback" />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">{{ $t('auth.password') }}</label>
-            <input id="password" class="form-control form-control-lg" v-model="password" :class="{ 'is-invalid': errors.password }" type="password" name="password" :placeholder="$t('auth.passwordPlaceholder')"/>
-            <div v-if="errors.password" class="invalid-feedback">{{ errors.password }}</div>
+            <label class="form-label">{{ $t('auth.password') }}</label>
+            <Field class="form-control form-control-lg" :class="{ 'is-invalid': errors.password }" type="password" name="password" :placeholder="$t('auth.passwordPlaceholder')" />
+            <ErrorMessage name="password" class="invalid-feedback" />
           </div>
           <div class="text-center mt-3">
             <button type="submit" class="btn btn-lg btn-primary">{{ $t('auth.signIn') }}</button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { useForm, useField } from 'vee-validate'
+import { Form, Field, ErrorMessage, FormActions } from 'vee-validate'
 import * as yup from 'yup'
 import { useI18n } from 'vue-i18n'
-import authService from '@/modules/auth/services/auth.service'
 import { useRouter } from 'vue-router'
 import { defineComponent } from 'vue'
+import AuthService from '@/modules/auth/services/auth.service'
+import AuthError from '@/modules/auth/errors/auth.error'
 
-interface LoginForm {
-  email: string;
-  password: string;
+interface LoginFormType extends Record<string, string>{
+  email: string,
+  password: string
 }
 
 export default defineComponent({
+  components: { Form, Field, ErrorMessage },
   setup() {
     const { t } = useI18n()
     const router = useRouter()
 
-    const validationSchema = yup.object({
+    const schema = yup.object({
       email: yup.string().email().required(),
       password: yup.string().min(6).max(30).required()
     })
 
-    const { handleSubmit, errors } = useForm<LoginForm>({ validationSchema })
-    const { value: email } = useField('email');
-    const { value: password } = useField('password');
-
-    const onSubmit = handleSubmit(async ({ email, password }, { setErrors }) => {
-      console.log()
+    const onSubmit = async (values: LoginFormType, { setFieldError }: FormActions<LoginFormType>) => {
       try {
-        await authService.login(email, password)
+        await AuthService.login(values.email, values.password)
       } catch (e) {
-        if (e.response !== undefined && e.response.status === 400) {
-          setErrors({ email: t('auth.error') })
+        if (e instanceof AuthError) {
+          setFieldError('email', t('auth.error'))
           return
         }
 
@@ -69,9 +66,9 @@ export default defineComponent({
       }
 
       await router.push({ name: 'home-index' })
-    });
+    }
 
-    return { email, password, onSubmit, errors }
+    return { schema, onSubmit }
   }
 })
 </script>

@@ -4,7 +4,7 @@ import { RouteRecordRaw } from 'vue-router'
 const authRoutes: RouteRecordRaw[] = [
   {
     path: '/auth',
-    component: () => import('@/modules/auth/layouts/auth.vue'),
+    component: () => import(/* webpackChunkName: "auth-layout" */ '@/modules/auth/layouts/auth.vue'),
     meta: {
       middlewares: [guestMiddleware]
     },

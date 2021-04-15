@@ -1,7 +1,7 @@
 import axios from 'axios'
-import router from '@/plugins/router'
 import env from '@/core/services/settings.service'
 import authService from '@/modules/auth/services/auth.service'
+import HttpError from '@/core/errors/http.error'
 
 axios.defaults.baseURL = env.apiHost
 
@@ -16,11 +16,7 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   return response
 }, (error) => {
-  if (error.response.status === 401) {
-      return Promise.reject(router.push({ name: 'auth-login' }))
-  }
-
-  return Promise.reject(error);
+  throw new HttpError(error.response)
 })
 
 const get = async (url: string) => {

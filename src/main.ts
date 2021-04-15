@@ -8,6 +8,7 @@ import store from '@/plugins/store'
 import VueClickAway from '@/plugins/v-click-away'
 import VueI18n from '@/plugins/vue-i18n'
 import FeatherIcon from '@/plugins/feather-icons'
+import VueNotification from '@/plugins/vue-toastification'
 
 (async () => {
   try {
@@ -18,11 +19,12 @@ import FeatherIcon from '@/plugins/feather-icons'
 
   const app = createApp(App)
   app.use(store)
-      .use(router)
-      .use(VueClickAway)
-      .use(FeatherIcon)
-      .use(VueI18n)
-      .mount('#app')
+    .use(router)
+    .use(VueClickAway)
+    .use(FeatherIcon)
+    .use(VueI18n)
+    .use(VueNotification)
+    .mount('#app')
 
   app.config.errorHandler = (error) => {
     errorService.handle(error)

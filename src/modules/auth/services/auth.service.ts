@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import rpcService from '@/core/services/rpc.service'
 import HttpService from '@/core/services/http.service'
+import AuthError from '@/modules/auth/errors/auth.error'
+import HttpError from '@/core/errors/http.error'
 
 let token: string|null = null
 let refreshToken = localStorage.getItem('refreshToken')
@@ -15,14 +17,27 @@ const getUser = () => user.value
 const isAuth = () => !!token && user.value !== null
 
 const login = async (email: string, password: string) => {
-  const { data } = await HttpService.post('/api/login', { email, password })
+  try {
+    const { data } = await HttpService.post('/api/login', { email, password })
 
-  token = data.token
-  refreshToken = data.refreshToken
-  localStorage.setItem('refreshToken', data.refreshToken)
+    token = data.token
+    refreshToken = data.refreshToken
+    localStorage.setItem('refreshToken', data.refreshToken)
 
-  await fetchUser()
-  startRefreshTimer(data.ttl)
+    await fetchUser()
+    startRefreshTimer(data.ttl)
+  } catch (e) {
+    if (e instanceof HttpError) {
+      if (e.response !== undefined && e.response.status === 401) {
+        throw new AuthError()
+      }
+    }
+
+    throw e
+  }
+
+
+
 }
 
 const logout = () => {
@@ -33,7 +48,7 @@ const logout = () => {
 
 const fetchToken = async () => {
   if (refreshToken === null) {
-    throw new Error('Token missing')
+    throw new AuthError('Token missing')
   }
 
   const { data } = await HttpService.post('/api/token/refresh', { refreshToken })
